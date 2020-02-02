@@ -2,9 +2,8 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
 
-
 dag = DAG(
-    'tutorial',
+    dag_id='tutorial',
     start_date=datetime.today() - timedelta(days=1),
     schedule_interval=timedelta(days=1)
 )
