@@ -8,11 +8,7 @@ with DAG(dag_id='simple_athena_query',
 
     run_query = AWSAthenaOperator(
         task_id='run_query',
-        query='SELECT 
-  *
-FROM UNNEST(SEQUENCE(DATE(‘2019–05–01’),
-                     DATE_TRUNC(‘day’, DATE(‘{{ ds }}’)),
-                     INTERVAL ‘1’ DAY))',
+        query='SELECT   * FROM UNNEST(SEQUENCE(DATE(‘2019–05–01’), DATE_TRUNC(‘day’, DATE(‘{{ ds }}’)), INTERVAL ‘1’ DAY))',
         output_location='s3://matchestest/airflow_athena/',
         database='sampledb'
     )
