@@ -5,7 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 
 default_args = {
-    'owner': 'Airflow',
+    'owner': 'bet369',
     'depends_on_past': False,
     'start_date': datetime(2019, 12, 5),
     'email': ['jobbing.314@gmail.com'],
@@ -20,16 +20,16 @@ default_args = {
 }
 
 
-with DAG(dag_id='simple_athena_query3'
+with DAG(dag_id='bet369_firstpart_goals_month'
          ,schedule_interval="@monthly"
          ,start_date=datetime(2019, 12, 5)
 		 ,template_searchpath = ['/sqls/']
 		 ,default_args=default_args) as dag:
 
-    run_query = AWSAthenaOperator(
-        task_id='run_query',
-        query="group_by_month.sql",
-		output_location='s3://matchestest/airflow_athena/',
+    tmp_minuts_info0 = AWSAthenaOperator(
+        task_id='00_tmp_minuts_info',
+        query="00_month_tmp_minuts_info.sql",
+		output_location='s3://matchestest/airflow_athena/logs',
         database='sampledb'
     )
 	
