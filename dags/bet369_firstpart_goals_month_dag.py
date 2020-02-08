@@ -25,7 +25,14 @@ with DAG(dag_id='bet369_firstpart_goals_month'
          ,start_date=datetime(2019, 12, 5)
 		 #,template_searchpath = ['./sqls/']
 		 ,default_args=default_args) as dag:
-
+		 
+    drop_tmp_minuts_info0 = AWSAthenaOperator(
+        task_id='00_drop_tmp_minuts_info',
+        query="/sqls/00_drop_month_tmp_minuts_info.sql",
+		output_location='s3://matchestest/airflow_athena/logs',
+        database='sampledb'
+    )
+	
     tmp_minuts_info0 = AWSAthenaOperator(
         task_id='00_tmp_minuts_info',
         query="/sqls/00_month_tmp_minuts_info.sql",
@@ -33,4 +40,4 @@ with DAG(dag_id='bet369_firstpart_goals_month'
         database='sampledb'
     )
 	
-	##task_one >> task_two >> [task_two_1, task_two_2, task_two_3] >> end
+	drop_tmp_minuts_info0 >> tmp_minuts_info0
