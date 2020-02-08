@@ -40,4 +40,4 @@ with DAG(dag_id='bet369_firstpart_goals_month'
         database='sampledb'
     )
 	
-	drop_tmp_minuts_info0 >> tmp_minuts_info0
+    drop_tmp_minuts_info0 >> tmp_minuts_info0
