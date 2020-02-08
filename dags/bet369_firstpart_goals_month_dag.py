@@ -23,7 +23,7 @@ default_args = {
 with DAG(dag_id='bet369_firstpart_goals_month'
          ,schedule_interval="@monthly"
          ,start_date=datetime(2019, 12, 5)
-		 ,template_searchpath = ['/sqls/']
+		 ,template_searchpath = ['./sqls/']
 		 ,default_args=default_args) as dag:
 
     tmp_minuts_info0 = AWSAthenaOperator(
