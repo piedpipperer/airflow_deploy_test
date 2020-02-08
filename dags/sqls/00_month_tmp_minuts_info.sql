@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS sampledb.TMP_MONTH_NODUPS;
-
 CREATE TABLE sampledb.TMP_MONTH_NODUPS 
 AS select * from (select MINUTS_INFO.*
 ,  row_number()  OVER (PARTITION BY MatchID, Status
