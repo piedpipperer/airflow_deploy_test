@@ -2,6 +2,7 @@ from airflow.models import DAG
 from airflow.contrib.operators.aws_athena_operator import AWSAthenaOperator
 from datetime import datetime
 #from airflow.providers.amazon.aws.operators.athena
+from datetime import timedelta
 
 default_args = {
     'owner': 'Airflow',
