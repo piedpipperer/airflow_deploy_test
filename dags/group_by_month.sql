@@ -1,0 +1,1 @@
+select cast(day / 100 as varchar(6)) , count(1) from sampledb.minuts_info where cast( replace(  cast( date_trunc('month', DATE('{{ ds }}')) as varchar(7))  , '-', '') as varchar(6)) = cast(day / 100 as varchar(6)) group by cast(day / 100 as varchar(6)) 
