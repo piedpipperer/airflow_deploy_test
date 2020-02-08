@@ -19,13 +19,15 @@ default_args = {
 }
 
 
-with DAG(dag_id='simple_athena_query',
+with DAG(dag_id='athena_query_v2',
+         schedule_interval="@monthly",
          start_date=datetime(2019, 12, 5)
 		 ,default_args=default_args) as dag:
 
     run_query = AWSAthenaOperator(
         task_id='run_query',
-        query="select * from UNNEST(SEQUENCE(DATE('2019-05-01'), date_trunc('day', DATE('{{ ds }}')), INTERVAL '1' DAY))",
+        query="select cast(day / 100 as varchar(6)) , count(1) from sampledb.minut_info where cast( replace(  cast( date_trunc('month', DATE('{{ ds }}')) as varchar(7))  , '-', '') as varchar(6)) = cast(day / 100 as varchar(6)) group by cast(day / 100 as varchar(6)) ",
+		#1st test: query="select * from UNNEST(SEQUENCE(DATE('2019-05-01'), date_trunc('day', DATE('{{ ds }}')), INTERVAL '1' DAY))",
         output_location='s3://matchestest/airflow_athena/',
         database='sampledb'
     )
