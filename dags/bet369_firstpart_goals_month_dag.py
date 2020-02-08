@@ -26,9 +26,17 @@ with DAG(dag_id='bet369_firstpart_goals_month'
 		 #,template_searchpath = ['./sqls/']
 		 ,default_args=default_args) as dag:
 		 
+	#need to include the load partitions of minutssss
+    refresh_minuts = AWSAthenaOperator(
+        task_id='refresh_parts_minuts_info',
+        query="MSCK REPAIR TABLE sampledb.minuts_info;",
+		output_location='s3://matchestest/airflow_athena/logs',
+        database='sampledb'
+    )
+	
     drop_tmp_minuts_info0 = AWSAthenaOperator(
         task_id='00_drop_tmp_minuts_info',
-        query="/sqls/00_drop_month_tmp_minuts_info.sql",
+        query="DROP TABLE IF EXISTS sampledb.TMP_MONTH_NODUPS;",
 		output_location='s3://matchestest/airflow_athena/logs',
         database='sampledb'
     )
@@ -40,4 +48,4 @@ with DAG(dag_id='bet369_firstpart_goals_month'
         database='sampledb'
     )
 	
-    drop_tmp_minuts_info0 >> tmp_minuts_info0
+    refresh_minuts >> drop_tmp_minuts_info0 >> tmp_minuts_info0
