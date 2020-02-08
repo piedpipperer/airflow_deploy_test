@@ -23,12 +23,12 @@ default_args = {
 with DAG(dag_id='bet369_firstpart_goals_month'
          ,schedule_interval="@monthly"
          ,start_date=datetime(2019, 12, 5)
-		 ,template_searchpath = ['./sqls/']
+		 #,template_searchpath = ['./sqls/']
 		 ,default_args=default_args) as dag:
 
     tmp_minuts_info0 = AWSAthenaOperator(
         task_id='00_tmp_minuts_info',
-        query="00_month_tmp_minuts_info.sql",
+        query="/sqls/00_month_tmp_minuts_info.sql",
 		output_location='s3://matchestest/airflow_athena/logs',
         database='sampledb'
     )
