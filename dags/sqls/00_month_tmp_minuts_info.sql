@@ -15,5 +15,6 @@ AS select * from (select MINUTS_INFO.*
 from MINUTS_INFO
 where cast( replace(  cast( date_trunc('month', DATE('{{ ds }}')) as varchar(7))  , '-', '') as varchar(6)) = 
 cast(day / 100 as varchar(6))
-AND status < 46
-) where ROWNUMB = 1; --RETREIVING MONTH FROM DAY.
+AND Status < 46
+) where ROWNUMB = 1; 
+
