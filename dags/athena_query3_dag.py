@@ -20,9 +20,9 @@ default_args = {
 }
 
 
-with DAG(dag_id='simple_athena_query2',
-         schedule_interval="@monthly",
-         start_date=datetime(2019, 12, 5)
+with DAG(dag_id='simple_athena_query3'
+         ,schedule_interval="@monthly"
+         ,start_date=datetime(2019, 12, 5)
 		 ,template_searchpath = ['']
 		 ,default_args=default_args) as dag:
 
