@@ -3,6 +3,7 @@ from airflow.contrib.operators.aws_athena_operator import AWSAthenaOperator
 from datetime import datetime
 #from airflow.providers.amazon.aws.operators.athena
 from datetime import timedelta
+from airflow.operators.bash_operator import BashOperator
 
 default_args = {
     'owner': 'Airflow',
