@@ -29,11 +29,11 @@ with DAG(dag_id='simple_athena_query',
 		
     month_nodash = "{{ ds_nodash }}" #[:-2]	
     echo_string = "echo " + month_nodash
-	
-	t1_doc = BashOperator(
+
+    t1_doc = BashOperator(
         task_id='print_month'
         ,bash_command=echo_string
-	)
+    )
 
 #	folder_month_delete = S3DeleteObjectsOperator(
 #        task_id='folder_month_delete'
