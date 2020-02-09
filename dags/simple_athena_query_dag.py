@@ -26,7 +26,7 @@ with DAG(dag_id='simple_athena_query',
 		 
 	t1_doc = BashOperator(
         task_id='print_month',
-        bash_command=str({{ ds_nodash }}[:-2])
+        bash_command='echo ' + str({{ ds_nodash }}[:-2])
 	)
 	
 #	folder_month_delete = S3DeleteObjectsOperator(
