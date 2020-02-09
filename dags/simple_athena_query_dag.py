@@ -20,16 +20,18 @@ default_args = {
     # 'end_date': datetime(2016, 1, 1),
 }
 
+echo_string = "echo {{ ds_nodash }}"[:-2]
 
 with DAG(dag_id='simple_athena_query',
          start_date=datetime(2019, 12, 5)
+		 ,schedule_interval="@once" 
 		 ,default_args=default_args) as dag:
 		 
 	t1_doc = BashOperator(
         task_id='print_month',
-        bash_command=str("echo {{ ds_nodash }}"[:-2])
+        bash_command=echo_string
 	)
-	
+
 #	folder_month_delete = S3DeleteObjectsOperator(
 #        task_id='folder_month_delete'
 #        ,bucket="matchestest"
