@@ -27,8 +27,8 @@ with DAG(dag_id='simple_athena_query',
 		 ,schedule_interval="@once" 
 		 ,default_args=default_args) as dag:
 		
-    month_nodash = "{{ ds_nodash }}" #[:-2]	
-    echo_string = "echo " + month_nodash
+    month_nodash = "{{ ds_nodash }}" #
+    echo_string = "echo " + month_nodash[:-2]	
 
     t1_doc = BashOperator(
         task_id='print_month'
