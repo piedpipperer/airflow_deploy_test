@@ -23,12 +23,24 @@ default_args = {
 with DAG(dag_id='simple_athena_query',
          start_date=datetime(2019, 12, 5)
 		 ,default_args=default_args) as dag:
-
-    run_query = AWSAthenaOperator(
-        task_id='run_query',
-        query="select * from UNNEST(SEQUENCE(DATE('2019-05-01'), date_trunc('day', DATE('{{ ds }}')), INTERVAL '1' DAY))",
-        output_location='s3://matchestest/airflow_athena/',
-        database='sampledb'
-    )
+		 
+	t1_doc = BashOperator(
+        task_id='print_month',
+        bash_command=str({{ ds_nodash }}[:-2])
+	)
 	
-	##task_one >> task_two >> [task_two_1, task_two_2, task_two_3] >> end
+#	folder_month_delete = S3DeleteObjectsOperator(
+#        task_id='folder_month_delete'
+#        ,bucket="matchestest"
+#        keys=str("/athena/matches_monthly/month=" + str({{ ds_nodash }}[:-2])),
+#    dag=dag
+#    )
+	
+#   run_query = AWSAthenaOperator(
+#       task_id='run_query',
+#       query="select * from UNNEST(SEQUENCE(DATE('2019-05-01'), date_trunc('day', DATE('{{ ds }}')), INTERVAL '1' DAY))",
+#       output_location='s3://matchestest/airflow_athena/',
+#       database='sampledb'
+#   )
+	
+##task_one >> task_two >> [task_two_1, task_two_2, task_two_3] >> end

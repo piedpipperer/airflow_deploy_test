@@ -3,6 +3,7 @@ from airflow.contrib.operators.aws_athena_operator import AWSAthenaOperator
 from datetime import datetime
 #from airflow.providers.amazon.aws.operators.athena
 from datetime import timedelta
+from airflow.hooks.S3_hook import S3Hook
 
 default_args = {
     'owner': 'bet369',
@@ -47,5 +48,6 @@ with DAG(dag_id='bet369_firstpart_goals_month'
 		output_location='s3://matchestest/airflow_athena/logs',
         database='sampledb'
     )
-	
+
+
     refresh_minuts >> drop_tmp_minuts_info0 >> tmp_minuts_info0
