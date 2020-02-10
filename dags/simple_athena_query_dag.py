@@ -5,7 +5,7 @@ from datetime import datetime
 #from airflow.providers.amazon.aws.operators.athena
 from datetime import timedelta
 from airflow.operators.bash_operator import BashOperator
-
+from airflow.hooks.S3_hook import S3Hook
 from airflow.macros import ds_format
 
 
