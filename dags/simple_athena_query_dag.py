@@ -7,7 +7,7 @@ from datetime import timedelta
 from airflow.operators.bash_operator import BashOperator
 from airflow.hooks.S3_hook import S3Hook
 from airflow.macros import ds_format
-
+from airflow.providers.amazon.aws.operators import s3_delete_objects
 
 default_args = {
     'owner': 'Airflow',
