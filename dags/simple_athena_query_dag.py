@@ -31,20 +31,20 @@ with DAG(dag_id='simple_athena_query',
 		 ,schedule_interval="@once" 
 		 ,default_args=default_args) as dag:
 		
-    month_nodash = ds_format( "{{ ds_nodash }}" , "%Y%m%d", "%Y%m") 
-    echo_string = "echo " + month_nodash #[:-2]	
-
+#    month_nodash = ds_format( "{{ ds_nodash }}" , "%Y%m%d", "%Y%m") 
+#    echo_string = "echo " + month_nodash #[:-2]	
+#
 #    t1_doc = BashOperator(
 #        task_id='print_month'
 #        ,bash_command=echo_string
 #    )
 
-#	folder_month_delete = S3DeleteObjectsOperator(
-#        task_id='folder_month_delete'
-#        ,bucket="matchestest"
-#        ,keys="/athena/matches_monthly/month=201912"  #+ str({{ ds_nodash }}[:-2]))
-#        ,dag=dag
-#    )
+	folder_month_delete = S3DeleteObjectsOperator(
+        task_id='folder_month_delete'
+        ,bucket="matchestest"
+        ,keys="/athena/matches_monthly/month=201912"  #+ str({{ ds_nodash }}[:-2]))
+        ,dag=dag
+    )
 	
 #   run_query = AWSAthenaOperator(
 #       task_id='run_query',
